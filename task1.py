@@ -29,7 +29,7 @@ def date_to_str(file):
  | 'convert_date_to_str' >> beam.Filter(date_to_str)
  | 'remove_unwanted_values' >> beam.Map(lambda line: line[0::3])
  | 'sum_values_per_date' >> beam.CombinePerKey(sum)
- | 'format_csv_file' >> beam.Map(lambda row: ', '.join([""+ str(column) +"" for column in row]))
+ | 'format_data_for_csv_file' >> beam.Map(lambda row: ', '.join([""+ str(column) +"" for column in row]))
  | 'write_to_csv' >> beam.io.WriteToText('output/results.jsonl.gz', header='date, total_amount',
                                          shard_name_template='')
 )
